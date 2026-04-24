@@ -51,9 +51,9 @@ function App() {
   return (
     <main className="min-h-screen bg-ink text-slate-100">
       <div className="flex min-h-screen w-full flex-col">
-        <header className="sticky top-0 w-full z-10 overflow-hidden border-b border-white/10 bg-slate-950/95 px-4 py-1 sm:px-5 lg:px-6">
+        <header className="sticky top-0 z-10 w-full overflow-hidden border-b border-white/10 bg-slate-950/95 px-3 py-3 sm:px-4 sm:py-4 lg:px-5">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(127,231,255,0.14),transparent_30%),linear-gradient(90deg,rgba(255,255,255,0.03),transparent_30%,transparent_70%,rgba(255,255,255,0.03))]" />
-          <div className="relative flex items-center justify-between gap-4">
+          <div className="relative flex items-center justify-between gap-5">
             <div className="min-w-0">
               <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-cyan">
                 Physics project
@@ -153,51 +153,6 @@ function App() {
                 onChange={(value) => updateControl('intensity', clamp(value, 0.2, 1))}
               />
             </div>
-            <section className="mt-6 rounded-[1.75rem] border border-white/10 bg-slate-950/70 p-5">
-              <p className="text-sm uppercase tracking-[0.22em] text-cyan">Physics Notes</p>
-              <div className="mt-4 space-y-4">
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <p className="text-sm text-slate-300">Fringe spacing</p>
-                  <p className="mt-2 text-2xl font-semibold text-white">y = lambda L / d</p>
-                  <p className="mt-2 text-sm leading-6 text-slate-300">
-                    Increasing wavelength or screen distance makes fringes farther apart.
-                    Increasing slit separation makes fringes closer together.
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <p className="text-sm text-slate-300">Central intensity</p>
-                  <p className="mt-2 text-2xl font-semibold text-white">
-                    {Math.round(derived.centerIntensity * 100)}%
-                  </p>
-                  <p className="mt-2 text-sm leading-6 text-slate-300">
-                    The middle bright fringe is strongest because both slit waves arrive in
-                    phase there.
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <p className="text-sm text-slate-300">Sample point on screen</p>
-                  <p className="mt-2 text-2xl font-semibold text-white">
-                    Order m ~= {derived.sampleOrder}
-                  </p>
-                  <p className="mt-2 text-sm leading-6 text-slate-300">
-                    At one off-center point, the path difference is about{' '}
-                    {Math.round(derived.samplePathDifferenceNm)} nm. When the path
-                    difference matches whole wavelengths, the screen becomes bright.
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-cyan/10 via-transparent to-gold/10 p-4">
-                  <p className="text-sm text-slate-300">Presentation script</p>
-                  <p className="mt-2 text-sm leading-6 text-slate-200">
-                    Start with the apparatus view, point to the central bright fringe, then
-                    change wavelength and slit separation to show how the fringe spacing
-                    reacts instantly.
-                  </p>
-                </div>
-              </div>
-            </section>
           </section>
         </section>
       </div>
