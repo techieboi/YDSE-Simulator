@@ -1,4 +1,5 @@
 const PI = Math.PI
+const SCREEN_HALF_RANGE_MM = 18
 
 export const DEFAULT_CONTROLS = {
   wavelength: 540,
@@ -41,9 +42,9 @@ export function createIntensitySeries(controls) {
   const slitSeparation = toMetersFromMm(controls.slitSeparation)
   const slitWidth = toMetersFromMm(controls.slitWidth)
   const screenDistance = controls.screenDistance
-  const fringeSpacing = computeFringeSpacing(controls)
-  // Sample a wider span so more fringes remain visible on the canvas screen.
-  const halfRangeMm = Math.max(10, fringeSpacing * 9.5)
+  // Keep a fixed physical slice of the screen so fringe spacing changes are
+  // visually comparable when wavelength, slit separation, or screen distance move.
+  const halfRangeMm = SCREEN_HALF_RANGE_MM
   const points = 241
 
   return Array.from({ length: points }, (_, index) => {

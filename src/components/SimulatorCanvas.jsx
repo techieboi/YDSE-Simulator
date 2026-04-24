@@ -1,5 +1,16 @@
 import { useEffect, useRef } from 'react'
 
+function getWaveSpacingPx(wavelengthNm) {
+  const normalized = (wavelengthNm - 380) / (750 - 380)
+  return 22 + normalized * 18
+}
+
+function getWaveCycleDurationMs(wavelengthNm) {
+  const spacingPx = getWaveSpacingPx(wavelengthNm)
+  const waveSpeedPxPerSecond = 11
+  return (spacingPx / waveSpeedPxPerSecond) * 1000
+}
+
 function drawCanvas(canvas, controls, derived, phase) {
   const context = canvas.getContext('2d')
 
@@ -84,8 +95,8 @@ function drawCanvas(canvas, controls, derived, phase) {
   context.arc(sourceX, centerY, 30, 0, Math.PI * 2)
   context.fill()
 
-  const waveCycle = 34
-  const waveSpacing = 34
+  const waveSpacing = getWaveSpacingPx(controls.wavelength)
+  const waveCycle = waveSpacing
   const sourceWaveCount = 7
 
   const sourceWaveCenter = { x: sourceX, y: centerY }
@@ -100,7 +111,7 @@ function drawCanvas(canvas, controls, derived, phase) {
     const alpha = Math.max(0.03, 0.3 - ring * 0.03)
     context.beginPath()
     context.arc(sourceWaveCenter.x, sourceWaveCenter.y, radius, -0.55, 0.55)
-    context.strokeStyle = `rgba(127, 231, 255, ${alpha.toFixed(2)})`
+    context.strokeStyle = waveColor.glow.replace('0.35', alpha.toFixed(2))
     context.lineWidth = 2
     context.stroke()
   }
@@ -140,7 +151,7 @@ function drawCanvas(canvas, controls, derived, phase) {
   intensitySeries.forEach((point, index) => {
     const y = screenTop + ((point.yMm + maxOffset) / (maxOffset * 2)) * screenHeight
     const bandHeight = screenHeight / intensitySeries.length + 1
-    const alpha = Math.max(0.05, point.intensity * controls.intensity)
+    const alpha = Math.max(0.05, point.intensity)
     const band = context.createLinearGradient(screenX, 0, screenX + 18, 0)
     band.addColorStop(0, `rgba(255,255,255,${alpha * 0.2})`)
     band.addColorStop(0.5, `rgba(255,255,255,${alpha})`)
@@ -186,7 +197,8 @@ function SimulatorCanvas({ controls, derived }) {
         startTime = timestamp
       }
 
-      const phase = ((timestamp - startTime) / 3200) % 1
+      const cycleDurationMs = getWaveCycleDurationMs(controls.wavelength)
+      const phase = ((timestamp - startTime) / cycleDurationMs) % 1
       drawCanvas(canvas, controls, derived, phase)
       animationFrame = window.requestAnimationFrame(render)
     }

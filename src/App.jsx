@@ -51,7 +51,7 @@ function App() {
   return (
     <main className="min-h-screen bg-ink text-slate-100">
       <div className="flex min-h-screen w-full flex-col">
-        <header className="fixed top-0 left-0 right-0 w-full z-10 overflow-hidden border-b border-white/10 bg-slate-950/95 px-4 py-1 sm:px-5 lg:px-6">
+        <header className="sticky top-0 w-full z-10 overflow-hidden border-b border-white/10 bg-slate-950/95 px-4 py-1 sm:px-5 lg:px-6">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(127,231,255,0.14),transparent_30%),linear-gradient(90deg,rgba(255,255,255,0.03),transparent_30%,transparent_70%,rgba(255,255,255,0.03))]" />
           <div className="relative flex items-center justify-between gap-4">
             <div className="min-w-0">
@@ -68,7 +68,7 @@ function App() {
           </div>
         </header>
 
-        <section className="flex flex-1 flex-col gap-4 px-3 py-3 pt-12 sm:px-4 sm:py-4 lg:flex-row lg:items-start lg:px-4">
+        <section className="flex flex-1 flex-col gap-4 px-3 py-3 sm:px-4 sm:py-4 lg:flex-row lg:items-start lg:px-4">
           <div className="min-w-0 lg:w-[46%] lg:flex-shrink-0 xl:w-[48%]">
             <SimulatorCanvas controls={controls} derived={derived} />
           </div>
