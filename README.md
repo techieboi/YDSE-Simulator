@@ -5,6 +5,7 @@ It provides a formula-accurate simulation for Young's Double Slit Experiment (YD
 The user can change the control paramteres in real-time and the projection canvas along with the intensity graph will reflect those changes.
 
 ## Getting Started
+visit at: https://ydse-simulator-two.vercel.app/
 Fork the repository and run locally-
 ```bash
 npm.cmd install
